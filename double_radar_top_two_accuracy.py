@@ -12,11 +12,14 @@ import matplotlib.pyplot as plt
 
 NUM_CLASSES = 6
 DATA_DIR = '/Users/danielcopeland/Library/CloudStorage/OneDrive-MassachusettsInstituteofTechnology/Yoga_Study_Simulated_RADAR'
-participants = ['01', '02', '03', '04', '05', '08', '09', '10', '12', '13', '14', '15', '16', '18', '22', '24']
+participants = ['01', '02', '03', '04', '05', '08', '10', '12', '13', '14', '15', '16', '18', '22', '24']
 
 # Load label data from CSV file
 labels_csv_path = "/Users/danielcopeland/Library/Mobile Documents/com~apple~CloudDocs/MIT Masters/DRL/LABx/RadarSimML/labels/simulation_labels_multi_radars.csv"
 labels_df = pd.read_csv(labels_csv_path)
+
+# Zero-fill the 'participant' column to a string of length 2
+labels_df['participant'] = labels_df['participant'].apply(lambda x: str(x).zfill(2))
 
 # Filter out unwanted transitions
 labels_df = labels_df[(labels_df['transition'] != 'CHAIR') & (labels_df['transition'] != 'YOGIS') & (labels_df['transition'] != 'DOWND')]
